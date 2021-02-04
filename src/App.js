@@ -1,9 +1,10 @@
 import React from 'react';
+import Home from './pages/Home';
 
 const App = () => {
   return (
     <div className='App'>
-      <h1>Game Dock</h1>
+      <Home />
     </div>
   );
 };
