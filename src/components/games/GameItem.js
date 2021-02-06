@@ -129,6 +129,7 @@ const StyledGame = styled(motion.div)`
         }
       }
       .platforms {
+        padding: 0 1rem;
         span {
           padding: 0.3rem 0.4rem;
           font-size: 0.8rem;

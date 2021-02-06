@@ -37,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-family: 'Roboto', sans-serif;
         width: 100%;
+        overflow-x: hidden;
     }
     h2{
         font-size: 2rem;
