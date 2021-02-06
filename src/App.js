@@ -1,11 +1,41 @@
 import React from 'react';
-import Home from './pages/Home';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import GlobalStyles from './components/GlobalStyles';
+import Navbar from './components/layout/Navbar';
+import About from './components/pages/About';
+import Home from './components/pages/Home';
+import Game from './components/games/Game';
+import NotFound from './components/pages/NotFound';
+import GamesState from './context/games/GamesState';
+import AlertState from './context/alert/AlertState';
+import Footer from './components/layout/Footer';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   return (
-    <div className='App'>
-      <Home />
-    </div>
+    <GamesState>
+      <AlertState>
+        <Router>
+          <div>
+            <GlobalStyles />
+            <Navbar />
+            <Route
+              render={({ location }) => (
+                <AnimatePresence exitBeforeEnter initial={false}>
+                  <Switch location={location} key={location.pathname}>
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/about' component={About} />
+                    <Route exact path='/game/:id' component={Game} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </AnimatePresence>
+              )}
+            />
+            <Footer />
+          </div>
+        </Router>
+      </AlertState>
+    </GamesState>
   );
 };
 
