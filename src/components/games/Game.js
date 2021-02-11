@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import Loader from '../layout/Loader';
 import GamesContext from '../../context/games/gamesContext';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 
 const Game = ({ match }) => {
   const gamesContext = useContext(GamesContext);
+
+  const location = useLocation();
+  const pathId = location.pathname.split('/')[2];
 
   const { getGame, singleGame, loading } = gamesContext;
 
@@ -27,62 +29,53 @@ const Game = ({ match }) => {
     // eslint-disable-next-line
   }, []);
 
-  const transition = { duration: 0.5, ease: 'easeInOut' };
-
-  const gameVariants = {
-    initial: { y: 100, opacity: 0 },
-    enter: { y: 0, opacity: 1, transition },
-    exit: { y: -100, opacity: 0, transition },
-  };
-
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
-        <GameStyles
-          initial='exit'
-          animate='enter'
-          exit='exit'
-          variants={gameVariants}
-        >
-          <h2>{name}</h2>
-          <img src={background_image} alt={name} />
-          <p>Release date: {newReleased}</p>
-          <h4>Platforms:</h4>
-          <div className='single-platforms'>
-            {platforms &&
-              platforms.map((platform) => {
-                const { id, name } = platform.platform;
-                return <span key={id}>{name}</span>;
-              })}
-          </div>
+        <>
+          {pathId && (
+            <GameStyles>
+              <h2>{name}</h2>
+              <img src={background_image} alt={name} />
+              <p>Release date: {newReleased}</p>
+              <h4>Platforms:</h4>
+              <div className='single-platforms'>
+                {platforms &&
+                  platforms.map((platform) => {
+                    const { id, name } = platform.platform;
+                    return <span key={id}>{name}</span>;
+                  })}
+              </div>
 
-          <h4>Game Description:</h4>
-          <p>{description_raw}</p>
-          <h4>Get it from:</h4>
-          <div className='single-stores'>
-            {stores &&
-              stores.map((store, index) => (
-                <span className='single-store' key={index}>
-                  <a href={store.url} target='_blank' rel='noreferrer'>
-                    {store.store.name}
-                  </a>
-                </span>
-              ))}
-          </div>
-          <button>
-            <Link to='/'>
-              <FaArrowLeft /> Home
-            </Link>
-          </button>
-        </GameStyles>
+              <h4>Game Description:</h4>
+              <p>{description_raw}</p>
+              <h4>Get it from:</h4>
+              <div className='single-stores'>
+                {stores &&
+                  stores.map((store, index) => (
+                    <span className='single-store' key={index}>
+                      <a href={store.url} target='_blank' rel='noreferrer'>
+                        {store.store.name}
+                      </a>
+                    </span>
+                  ))}
+              </div>
+              <button>
+                <Link to='/'>
+                  <FaArrowLeft /> Home
+                </Link>
+              </button>
+            </GameStyles>
+          )}
+        </>
       )}
     </>
   );
 };
 
-const GameStyles = styled(motion.div)`
+const GameStyles = styled.div`
   width: 80vw;
   max-width: var(--max-width);
   margin: 0 auto;

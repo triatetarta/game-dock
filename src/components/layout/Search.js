@@ -3,7 +3,6 @@ import GamesContext from '../../context/games/gamesContext';
 import AlertContext from '../../context/alert/alertContext';
 import styled from 'styled-components';
 import close from '../../images/close.svg';
-import { motion } from 'framer-motion';
 
 const Search = () => {
   const gamesContext = useContext(GamesContext);
@@ -25,16 +24,8 @@ const Search = () => {
 
   const onChange = (e) => setText(e.target.value);
 
-  const transition = { duration: 0.5, ease: 'easeInOut' };
-
-  const searchVariants = {
-    initial: { y: '-100%', opacity: 0 },
-    enter: { y: 0, opacity: 1, transition },
-    exit: { y: '-100%', opacity: 0, transition },
-  };
-
   return (
-    <SearchBar variants={searchVariants}>
+    <SearchBar>
       <form className='form' onSubmit={onSubmit}>
         <input
           className='text'
@@ -58,7 +49,7 @@ const Search = () => {
   );
 };
 
-const SearchBar = styled(motion.div)`
+const SearchBar = styled.div`
   width: 80vw;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -97,6 +88,11 @@ const SearchBar = styled(motion.div)`
       cursor: pointer;
       font-weight: normal;
       font-size: 0.9rem;
+      transition: all 0.2s linear;
+
+      &:hover {
+        background-color: #592caa;
+      }
     }
   }
 

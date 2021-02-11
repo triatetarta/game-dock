@@ -80,7 +80,7 @@ const GamesState = (props) => {
   const getGame = async (game_id) => {
     setLoading();
     const res = await axios.get(gameDetailsURL(game_id));
-    console.log(res);
+
     dispatch({
       type: GET_GAME_DETAILS,
       payload: res.data,

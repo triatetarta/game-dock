@@ -47,6 +47,10 @@ const Navigation = styled.nav`
         font-weight: bold;
         /* color: var(--text-grey); */
         color: rgb(118, 118, 118);
+
+        &:hover {
+          border-bottom: 2px solid #8b54ce;
+        }
       }
     }
   }

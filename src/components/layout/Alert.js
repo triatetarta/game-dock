@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import styled from 'styled-components';
 import { FiAlertTriangle } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Alert = () => {
   const alertContext = useContext(AlertContext);
@@ -10,24 +9,17 @@ const Alert = () => {
   const { alert } = alertContext;
 
   return (
-    <AnimatePresence>
-      <Hidden className='hidden'>
-        {alert !== null && (
-          <AlertStyles
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: '0%' }}
-            exit={{ opacity: 0, y: '-100%' }}
-            className={`alert alert-${alert.type}`}
-          >
-            <FiAlertTriangle /> {alert.msg}
-          </AlertStyles>
-        )}
-      </Hidden>
-    </AnimatePresence>
+    <Hidden className='hidden'>
+      {alert !== null && (
+        <AlertStyles className={`alert alert-${alert.type}`}>
+          <FiAlertTriangle /> {alert.msg}
+        </AlertStyles>
+      )}
+    </Hidden>
   );
 };
 
-const AlertStyles = styled(motion.div)`
+const AlertStyles = styled.div`
   width: 80vw;
   max-width: var(--max-width);
   margin: 1rem auto;
@@ -35,7 +27,7 @@ const AlertStyles = styled(motion.div)`
   border-radius: 14px;
 `;
 
-const Hidden = styled(motion.div)`
+const Hidden = styled.div`
   overflow: hidden;
 `;
 

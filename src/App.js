@@ -9,7 +9,6 @@ import NotFound from './components/pages/NotFound';
 import GamesState from './context/games/GamesState';
 import AlertState from './context/alert/AlertState';
 import Footer from './components/layout/Footer';
-import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   return (
@@ -21,14 +20,12 @@ const App = () => {
             <Navbar />
             <Route
               render={({ location }) => (
-                <AnimatePresence exitBeforeEnter initial={false}>
-                  <Switch location={location} key={location.pathname}>
-                    <Route exact path='/' component={Home} />
-                    <Route exact path='/about' component={About} />
-                    <Route exact path='/game/:id' component={Game} />
-                    <Route component={NotFound} />
-                  </Switch>
-                </AnimatePresence>
+                <Switch location={location} key={location.pathname}>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/game/:id' component={Game} />
+                  <Route component={NotFound} />
+                </Switch>
               )}
             />
             <Footer />

@@ -1,23 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const GameItem = ({
-  game: { name, released, background_image, id, platforms, stores },
+  game: { name, released, background_image, id, platforms },
 }) => {
   const newReleased = new Date(released).toDateString();
 
-  const transition = { duration: 0.5, ease: 'easeInOut' };
-
-  const gameItemVariants = {
-    initial: { x: '100%', opacity: 0 },
-    enter: { x: 0, opacity: 1, transition },
-    exit: { x: '-100%', opacity: 0, transition },
-  };
-
   return (
-    <StyledGame variants={gameItemVariants}>
+    <StyledGame>
       <Link to={`/game/${id}`}>
         <div className='card-container'>
           <h3>{name}</h3>
@@ -29,14 +20,6 @@ const GameItem = ({
                 return <span key={id}>{name}</span>;
               })}
           </div>
-          <div className='stores'>
-            {stores &&
-              stores.map((store, index) => (
-                <span className='store' key={index}>
-                  {store.store.name}
-                </span>
-              ))}
-          </div>
         </div>
 
         <img src={background_image} alt={name} />
@@ -45,8 +28,9 @@ const GameItem = ({
   );
 };
 
-const StyledGame = styled(motion.div)`
-  min-height: 30vh;
+const StyledGame = styled.div`
+  height: 250px;
+  /* min-height: 30vh; */
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   border-radius: 1rem;
@@ -68,25 +52,11 @@ const StyledGame = styled(motion.div)`
 
     h3 {
       color: var(--text-light);
+      font-size: 1.1rem;
     }
     p {
       color: var(--text-light);
-    }
-
-    .stores {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      .store {
-        color: var(--text-dark);
-        padding: 0.4rem 0.6rem;
-        background: var(--text-light);
-        border-radius: 14px;
-        font-weight: bold;
-      }
+      font-size: 0.9rem;
     }
 
     .platforms {
@@ -103,13 +73,14 @@ const StyledGame = styled(motion.div)`
         border-radius: 5px;
         padding: 0.5rem 0.5rem;
         color: var(--text-light);
+        font-size: 0.7rem;
       }
     }
   }
 
   img {
     width: 100%;
-    height: 40vh;
+    height: 100%;
     object-fit: cover;
   }
 

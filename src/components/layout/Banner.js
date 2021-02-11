@@ -1,19 +1,10 @@
 import React from 'react';
 import img from '../../images/banner.png';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-
-const transition = { duration: 0.5, ease: 'easeInOut' };
-
-const bannerVariants = {
-  initial: { opacity: 0 },
-  enter: { opacity: 1, transition },
-  exit: { opacity: 0, transition },
-};
 
 const Banner = () => {
   return (
-    <BannerStyles className='banner' variants={bannerVariants}>
+    <BannerStyles className='banner'>
       <div className='banner-img'>
         <img src={img} alt='playstation controller banner' />
         <div className='banner-text'>
@@ -30,7 +21,7 @@ const Banner = () => {
   );
 };
 
-const BannerStyles = styled(motion.div)`
+const BannerStyles = styled.div`
   width: 80vw;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -87,6 +78,11 @@ const BannerStyles = styled(motion.div)`
         font-size: 1rem;
         cursor: pointer;
         margin-top: 0.8rem;
+        transition: all 0.2s linear;
+
+        &:hover {
+          width: 125px;
+        }
       }
     }
   }
