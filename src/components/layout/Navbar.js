@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import logo from '../../images/logo.svg';
 
 const Navbar = () => {
   return (
     <Navigation>
-      <h1>
-        <Link to='/'>Game Dock</Link>
-      </h1>
+      <div className='logo'>
+        <Link to='/'>
+          <img src={logo} alt='game dock logo' />
+        </Link>
+      </div>
       <ul>
         <li>
           <Link to='/'>Home</Link>
@@ -29,10 +32,11 @@ const Navigation = styled.nav`
   align-items: center;
   justify-content: space-between;
 
-  h1 {
-    font-family: var(--secondary-font);
+  .logo {
     a {
-      color: #8b54ce;
+      img {
+        width: 100%;
+      }
     }
   }
 
@@ -62,9 +66,11 @@ const Navigation = styled.nav`
   @media screen and (max-width: 600px) {
     max-width: 80vw;
 
-    h1 {
+    .logo {
       a {
-        font-size: 1.2rem;
+        img {
+          width: 100%;
+        }
       }
     }
     ul {

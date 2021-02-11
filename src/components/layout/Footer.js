@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from '../../images/logo.svg';
 
 const Footer = () => {
   return (
     <FooterStyles>
       <div className='footer-logo'>
-        <h3>GAME DOCK</h3>
+        <img src={logo} alt='game dock logo' />
       </div>
       <div className='footer-container'>
         <div className='info'>
@@ -58,9 +59,9 @@ const FooterStyles = styled.footer`
     margin: 0 auto;
     border-bottom: 1px solid #d9d9d9;
 
-    h3 {
-      font-family: var(--secondary-font);
-      color: var(--text-dark);
+    img {
+      width: 180px;
+      padding: 2rem 0;
     }
   }
 
@@ -100,6 +101,12 @@ const FooterStyles = styled.footer`
   }
 
   @media screen and (max-width: 600px) {
+    .footer-logo {
+      img {
+        width: 140px;
+      }
+    }
+
     .footer-container {
       flex-wrap: wrap;
       .info {
